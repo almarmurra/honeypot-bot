@@ -113,7 +113,7 @@ bsc_child.on('message', (d)=> {
         msg = `❌ <b>Yup, honeypot. Run the fuck away.</b>
         ❌
 ${data.noLiq == undefined?'': no_liquidity_msg}
-<b>Token Name:</b> ${data.tokenName} (${data.tokenSym})
+<b>Token Name:</b> ${data.tokenName} (${data.tokenSymbol})
 <b>Chain:</b> ${data.chain === 'bsc'?'Binance Smart Chain': 'Ethereum'}
 
 <b>Error:</b> ${data.error}`
@@ -138,7 +138,7 @@ ${data.noLiq == undefined?'': no_liquidity_msg}
 <i>This can always change! Do your own due dilligence</i>
                 ${data.noLiq == undefined?'': no_liquidity_msg}
 
- <b>Token Name</b>: ${data.tokenName} (${data.tokenSym})
+ <b>Token Name</b>: ${data.tokenName} (${data.tokenSymbol})
  <b>Chain</b>: ${data.chain === 'bsc'?'Binance Smart Chain': 'Ethereum'}
                 ${data.maxInfo==undefined?'':maxInfo}
 <b>Gas used for Buying:</b> ${buyGas}
@@ -148,7 +148,7 @@ ${data.noLiq == undefined?'': no_liquidity_msg}
 <b>Sell Tax</b> ${data.sellTax}%`
             } else {
                 msg = `❔<b>UNKNOWN</b>❔
-<b>Token Name:</b> ${data.tokenName} (${data.tokenSym})
+<b>Token Name:</b> ${data.tokenName} (${data.tokenSymbol})
 <b>Chain</b>: ${data.chain === 'bsc'?'Binance Smart Chain': 'Ethereum'}
 
 <b>INFO:</b> Unable to perform checks due to vesting schedule/sell limit.`
@@ -157,7 +157,7 @@ ${data.noLiq == undefined?'': no_liquidity_msg}
         } else {
             msg = `The honeypot checker was unable to determine the result for the specified address. Possible reason might be that there is no liquidity paired with BNB on PancakeSwap
 
-<b>Token Name</b>: ${data.tokenName} (${data.tokenSym})
+<b>Token Name</b>: ${data.tokenName} (${data.tokenSymbol})
 <b>Chain</b>: ${data.chain === 'bsc'?'Binance Smart Chain': 'Ethereum'}
 
 ${data.error}`
