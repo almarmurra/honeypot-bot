@@ -3,13 +3,14 @@ const Web3 = require("web3");
 const bodyParser = require('body-parser');
 const {
     Telegraf,
-    Markup
+    Markup,
+    Extra
 } = require('telegraf');
 const cp = require('child_process');
 
 let bsc_child = cp.fork('./workerbsc');
 
-
+let context = null;
 
 const app = express();
 
@@ -61,7 +62,7 @@ app.use(router);
 bot.command('start', (ctx) => ctx.reply('Hello man, welcome'));
 
 bot.on('text', async (ctx)=> {
-
+    context = ctx;
     let bsc_status = -1;
     let eth_status = -1;
     let message = ctx.update.message;
@@ -165,14 +166,19 @@ ${data.error}`
 
 
         let scan_url = data.chain !== 'bsc'?`https://etherscan.io/token/${data.address}`: `https://bscscan.com/token/${data.address}`
-        let chart_url = data.chain !== 'bsc'? `https://www.dextools.io/app/ether/pair-explorer/${data.address}`: `https://apespace.io/bsc/${data.address}?ref=honey`
+        let chart_url = data.chain !== 'bsc'? `https://www.dextools.io/app/ether/pair-explorer/${data.address}`: `https://apespace.io/bsc/${data.address}?ref=honey`;
         
-        let button = Markup.inlineKeyboard([Markup.button.url(`📝${data.chain == 'bsc'?'BscScan': 'EtherScan'}`, scan_url), Markup.button.url('📈Chart', chart_url)]);
+        let button = [{text:`📝${data.chain=='bsc'?'BscScan':'EtherScan'}`, url:scan_url}, {text:'📈Chart', url:chart_url}]
 
+     /*
         bot.telegram.sendMessage(data.chatId, msg, {
             parse_mode: 'HTML',
             reply_to_message_id: data.msgId,
-            reply_markup: button
+            reply_markup: Markup.inlineKeyboard([Markup.button.url('ajjjs', 'https://ajkk.com')])
+        });
+        */
+        context.replyWithHTML(msg, Markup.inlineKeyboard([Markup.button.url(`📝${data.chain=='bsc'?'BscScan':'EtherScan'}`, scan_url), Markup.button.url('📈Chart', chart_url)]), {
+            reply_to_message_id:data.msgId
         });
 
     });
