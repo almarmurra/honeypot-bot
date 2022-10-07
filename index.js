@@ -51,7 +51,7 @@ router.get('/sethook', (req, res)=> {
 
 router.post('/coininfo', (req, res)=> {
 
-    console.log(req.body);
+    //console.log(req.body);
     res.send('ok');
 });
 
@@ -59,7 +59,7 @@ app.use(router);
 
 
 //Handlers
-bot.command('start', (ctx) => ctx.reply('Hello man, welcome'));
+bot.command('start', (ctx) => ctx.reply('Hello there, welcome to Mute DAO honeypot checker.'));
 
 bot.on('text', async (ctx)=> {
     context = ctx;
