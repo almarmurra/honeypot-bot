@@ -110,8 +110,7 @@ bsc_child.on('message', (d)=> {
     if (data.status == HONEYPOT) {
         no_liquidity_msg = '\n<b>INFO!</b> There is no liquidity with BNB. Honeypot added liquidity for test - it may be that honeypot simply failed to add liquidity rather than it being a honeypot. Results with non-BNB pair may differ. If the token is not live yet, results may be different once the token is live. It is common for tokens to have 0% taxes before launching on DEX!\n'
 
-        msg = `❌ <b>Yup, honeypot. Run the fuck away.</b>
-        ❌
+        msg = `❌ <b>Yup, honeypot. Run the fuck away.</b>❌
 ${data.noLiq == undefined?'': no_liquidity_msg}
 <b>Token Name:</b> ${data.tokenName} (${data.tokenSymbol})
 <b>Chain:</b> ${data.chain === 'bsc'?'Binance Smart Chain': 'Ethereum'}
@@ -123,7 +122,7 @@ ${data.noLiq == undefined?'': no_liquidity_msg}
         let maxInfo = null;
         let no_liquidity_msg = '\n<b>INFO!</b> There is no liquidity with BNB. Honeypot added liquidity for test. Results with non-BNB pair may differ. If the token is not live yet, results may be different once the token is live. It is common for tokens to have 0% taxes before launching on DEX\n';
 
-        if (data.buyGas !== undefined) {
+        if (data.buyGas !== undefined && data.buyGas !==null) {
             buyGas = numberWithCommas(data.buyGas);
             sellGas = numberWithCommas(data.sellGas);
 
@@ -145,7 +144,7 @@ ${data.noLiq == undefined?'': no_liquidity_msg}
 <b>Gas used for Selling:</b> ${sellGas}
 
 <b>Buy Tax:</b> ${data.buyTax}%
-<b>Sell Tax</b> ${data.sellTax}%`
+<b>Sell Tax:</b> ${data.sellTax}%`
             } else {
                 msg = `❔<b>UNKNOWN</b>❔
 <b>Token Name:</b> ${data.tokenName} (${data.tokenSymbol})
